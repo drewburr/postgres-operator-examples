@@ -9,7 +9,7 @@ spec:
   #   type: LoadBalancer
   instances:
     - name: instance1
-      replicas: 2
+      replicas: 4
       dataVolumeClaimSpec:
         accessModes:
         - "ReadWriteOnce"
