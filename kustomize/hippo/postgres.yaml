@@ -10,6 +10,9 @@ spec:
   #   type: LoadBalancer
   users:
     - name: rhino
+      databases:
+        - zoodev
+        - zoouat
   instances:
     - name: instance1
       replicas: 3
