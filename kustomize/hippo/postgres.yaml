@@ -6,6 +6,9 @@ spec:
   image: registry.developers.crunchydata.com/crunchydata/crunchy-postgres:centos8-13.4-1
   postgresVersion: 13
   shutdown: false
+  databaseInitSQL:
+    key: init.sql
+    name: ecto-init-sql
   # service:
   #   type: LoadBalancer
   users:
