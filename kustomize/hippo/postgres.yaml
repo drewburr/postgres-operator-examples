@@ -8,6 +8,8 @@ spec:
   shutdown: false
   # service:
   #   type: LoadBalancer
+  users:
+    - name: rhino
   instances:
     - name: instance1
       replicas: 3
