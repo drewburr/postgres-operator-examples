@@ -16,6 +16,10 @@ spec:
       databases:
         - zoodev
         - zoouat
+  dataSource:
+    postgresCluster:
+      clusterName: hippo
+      repoName: repo1
   instances:
     - name: instance1
       replicas: 3
