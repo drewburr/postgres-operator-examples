@@ -32,6 +32,10 @@ spec:
         log-level-console: info
         repo1-retention-full-type: time
         repo1-retention-full: "7"
+      manual:
+        repoName: repo1
+        options:
+        - --type=full
       repos:
       - name: repo1
         volume:
