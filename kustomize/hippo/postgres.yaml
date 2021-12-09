@@ -38,6 +38,9 @@ spec:
         - --type=incr
       repos:
       - name: repo1
+        schedules:
+           full: "0 1 * * 0"
+           incremental: "0 1 * * 1-6"
         volume:
           volumeClaimSpec:
             accessModes:
