@@ -36,6 +36,12 @@ spec:
         repoName: repo1
         options:
         - --type=incr
+      restore:
+        enabled: true
+        repoName: repo1
+        options:
+          - --type=time
+          - --target="2021-12-09 15:26:52"
       repos:
       - name: repo1
         schedules:
