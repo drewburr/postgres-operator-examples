@@ -20,6 +20,9 @@ spec:
     postgresCluster:
       clusterName: hippo
       repoName: repo1
+      options:
+        - --type=time
+        - --target="2021-12-09 14:32:10"
   instances:
     - name: instance1
       replicas: 3
