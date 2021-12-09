@@ -1,0 +1,59 @@
+apiVersion: postgres-operator.crunchydata.com/v1beta1
+kind: PostgresCluster
+metadata:
+  name: hippo
+spec:
+  image: registry.developers.crunchydata.com/crunchydata/crunchy-postgres:centos8-13.4-1
+  postgresVersion: 13
+  shutdown: false
+  databaseInitSQL:
+    key: init.sql
+    name: ecto-init-sql
+  # service:
+  #   type: LoadBalancer
+  users:
+    - name: rhino
+      databases:
+        - zoodev
+        - zoouat
+  instances:
+    - name: instance1
+      replicas: 3
+      dataVolumeClaimSpec:
+        accessModes:
+        - "ReadWriteOnce"
+        resources:
+          requests:
+            storage: 1Gi
+  backups:
+    pgbackrest:
+      image: registry.developers.crunchydata.com/crunchydata/crunchy-pgbackrest:centos8-2.35-0
+      global:
+        log-level-console: info
+        repo1-retention-full-type: time
+        repo1-retention-full: "7"
+      manual:
+        repoName: repo1
+        options:
+        - --type=incr
+      repos:
+      - name: repo1
+        schedules:
+           full: "0 1 * * 0"
+           incremental: "0 1 * * 1-6"
+        volume:
+          volumeClaimSpec:
+            accessModes:
+            - "ReadWriteOnce"
+            resources:
+              requests:
+                storage: 1Gi
+  patroni:
+    dynamicConfiguration:
+      postgresql:
+        parameters:
+          max_parallel_workers: 2
+          max_worker_processes: 2
+          shared_buffers: 256MB
+          work_mem: 5MB
+          archive_timeout: 300
